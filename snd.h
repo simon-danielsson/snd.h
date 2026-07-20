@@ -64,8 +64,7 @@ bool snd_str_is_empty(const char *s) {
   return true;
 }
 
-// returns true if a and b are different
-// from eachother at a memory level
+// returns true if a and b are different from eachother at a memory level
 bool snd_are_diff(const void *a, const void *b) {
   return memcmp(a, b, sizeof *b) != 0;
 }
@@ -75,6 +74,7 @@ void snd_str_to_lowercase(char *s, size_t len) {
     s[i] = tolower(s[i]);
 }
 
+// trims start/end spaces of a str in place
 // inspired by the .trim() method of Rust
 void snd_trim_str(char *str) {
   char *start = str;
