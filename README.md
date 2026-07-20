@@ -38,9 +38,6 @@ the time to skim the library's contents before cloning.
 Download (or copy) [snd.h](./snd.h) into your codebase and include it like this:
   
 ``` c
-#include ...
-#include ...
-#include ...
 #define SND_IMPLEMENTATION
 #include "snd.h"
 ```

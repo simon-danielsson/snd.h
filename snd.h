@@ -8,17 +8,14 @@
  */
 
 /*
-   ------------------------------------------------------
-   Define "#define SND_IMPLEMENTATION" before you include this file in *one* C
+   Add "#define SND_IMPLEMENTATION" before you include this file in *one* C
    file to create the implementation.
 
-// i.e. it should look like this:
-#include ...
-#include ...
-#include ...
+It should look like this:
+
 #define SND_IMPLEMENTATION
 #include "snd.h"
-------------------------------------------------------
+
  */
 
 #ifndef _INCLUDE_SND_H
