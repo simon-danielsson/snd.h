@@ -5,7 +5,6 @@
 #include "../snd.h"
 
 int main() {
-
     char *x = "x";
     char *y = "y";
     if (snd_are_diff(x, y)) {

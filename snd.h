@@ -24,20 +24,41 @@
 #ifndef _INCLUDE_SND_H
 #define _INCLUDE_SND_H
 
-#ifdef SND_IMPLEMENTATION
+#ifndef _SND_DEF
+#define _SND_DEF
 
 #include <ctype.h>
+#include <stdio.h>
 #include <stdlib.h>
 
-static size_t _snd_get_fsize(FILE **f) {
+// true = str is empty
+bool snd_str_is_empty(const char *s);
+
+// note: returns allocated string that must be freed
+// returns NULL on error
+char *snd_read_entire_file(FILE *f);
+
+// true if a and b are different at a memory level
+bool snd_are_diff(const void *a, const void *b);
+
+void snd_str_to_lowercase(char *s, size_t len);
+
+// trims start/end spaces of a str in place
+// inspired by the .trim() method of Rust
+void snd_trim_str(char *str);
+
+#endif // _SND_DEF
+
+#ifdef SND_IMPLEMENTATION
+
+// internal
+size_t _snd_get_fsize(FILE **f) {
   fseek(*f, 0, SEEK_END);
   long fsize = ftell(*f);
   fseek(*f, 0, SEEK_SET);
   return fsize;
 }
 
-// note: returns allocated string that must be freed
-// returns NULL on error
 char *snd_read_entire_file(FILE *f) {
   size_t fsize = _snd_get_fsize(&f);
   char *content = malloc(fsize + 1);
@@ -54,7 +75,6 @@ char *snd_read_entire_file(FILE *f) {
   return content;
 }
 
-// returns true if input str is empty
 bool snd_str_is_empty(const char *s) {
   for (int i = 0; s[i] != '\0'; i++) {
     if (isalpha(s[i])) {
@@ -64,7 +84,6 @@ bool snd_str_is_empty(const char *s) {
   return true;
 }
 
-// returns true if a and b are different from eachother at a memory level
 bool snd_are_diff(const void *a, const void *b) {
   return memcmp(a, b, sizeof *b) != 0;
 }
@@ -74,8 +93,6 @@ void snd_str_to_lowercase(char *s, size_t len) {
     s[i] = tolower(s[i]);
 }
 
-// trims start/end spaces of a str in place
-// inspired by the .trim() method of Rust
 void snd_trim_str(char *str) {
   char *start = str;
   while (*start && isspace((unsigned char)*start)) {
