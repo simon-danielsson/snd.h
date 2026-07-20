@@ -31,8 +31,8 @@ It should look like this:
 // true = str is empty
 bool snd_str_is_empty(const char *s);
 
-// note: returns allocated string that must be freed
-// returns NULL on error
+// note: returns a heap-allocated string to be freed by the caller
+// on error: returns NULL
 char *snd_read_entire_file(FILE *f);
 
 // true if a and b are different at a memory level
